@@ -1,0 +1,38 @@
+# ABOUTME: MCP server crate exposing health domain models via Model Context Protocol
+# ABOUTME: Supports stdio and HTTP transports with health, sleep, recovery, and workout tools
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 dravr.ai
+
+[package]
+name = "dravr-equilibre-mcp"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "MCP server for dravr-equilibre health domain models — expose health intelligence via Model Context Protocol"
+repository = "https://github.com/dravr-ai/dravr-equilibre"
+readme = "README.md"
+keywords = ["mcp", "health", "wellness", "json-rpc", "wearables"]
+categories = ["science", "development-tools"]
+publish = false
+
+[lib]
+name = "dravr_equilibre_mcp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "dravr-equilibre-mcp"
+path = "src/main.rs"
+
+[dependencies]
+dravr-equilibre = { path = "../..", version = "0.1.0" }
+dravr-tronc = "0.1.0"
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full", "test-util"] }
+
+[lints]
+workspace = true

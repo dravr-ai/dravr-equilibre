@@ -1,0 +1,43 @@
+# ABOUTME: Unified REST API + MCP server for dravr-equilibre health domain models
+# ABOUTME: Exposes health models via HTTP endpoints and MCP protocol
+#
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2026 dravr.ai
+
+[package]
+name = "dravr-equilibre-server"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+description = "Unified REST API + MCP server for dravr-equilibre health domain models"
+repository = "https://github.com/dravr-ai/dravr-equilibre"
+readme = "README.md"
+keywords = ["health", "wellness", "rest", "mcp", "server"]
+categories = ["science", "web-programming::http-server"]
+publish = false
+
+[lib]
+name = "dravr_equilibre_server"
+path = "src/lib.rs"
+
+[[bin]]
+name = "dravr-equilibre-server"
+path = "src/main.rs"
+
+[dependencies]
+dravr-equilibre = { path = "../..", version = "0.1.0" }
+dravr-equilibre-mcp = { path = "../dravr-equilibre-mcp", version = "0.1.0" }
+dravr-tronc = "0.1.0"
+axum = "0.8"
+clap = { version = "4", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+
+[dev-dependencies]
+http-body-util = "0.1"
+tokio = { version = "1", features = ["full", "test-util"] }
+tower = { version = "0.5", features = ["util"] }
+
+[lints]
+workspace = true
