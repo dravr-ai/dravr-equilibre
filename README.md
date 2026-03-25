@@ -22,7 +22,7 @@ Health and wellness domain models for the Dravr platform. Composition-based prov
 
 ```toml
 [dependencies]
-dravr-equilibre = "0.1"
+dravr-equilibre = "0.2"
 ```
 
 ```rust
