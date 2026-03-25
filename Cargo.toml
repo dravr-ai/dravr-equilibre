@@ -9,7 +9,7 @@ members = [".", "crates/dravr-equilibre-mcp", "crates/dravr-equilibre-server"]
 
 [package]
 name = "dravr-equilibre"
-version = "0.0.0"
+version = "0.1.0"
 edition = "2021"
 license = "Apache-2.0"
 description = "Health and wellness domain models — composition-based provider traits, device tracking, and data source management"

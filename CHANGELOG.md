@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.0] — 2026-03-25
+
+### Added
+
+- feat: initial scaffold — composition-based health domain models 3 workspace crates (core, MCP, server), provider traits, device tracking, 36 tests
+
+
+
 ## [0.1.0] - 2026-03-24
 
 ### Added
