@@ -5,8 +5,8 @@
 // Copyright (c) 2026 dravr.ai
 
 use chrono::{Duration, TimeZone, Utc};
-use dravr_equilibre::sleep::{SleepDetails, SleepStage, SleepStageType, StoredSleepSession};
 use dravr_equilibre::event::{EventCategory, EventRecord};
+use dravr_equilibre::sleep::{SleepDetails, SleepStage, SleepStageType, StoredSleepSession};
 
 /// Helper to create a fully populated sleep session for reuse across tests.
 fn full_sleep_session() -> StoredSleepSession {
@@ -170,8 +170,7 @@ fn test_stages_empty_vec() {
     };
 
     // Empty stages serializes to "[]"
-    let json = serde_json::to_string(&session.stages)
-        .expect("empty stages vec should serialize");
+    let json = serde_json::to_string(&session.stages).expect("empty stages vec should serialize");
     assert_eq!(json, "[]");
 }
 
@@ -230,7 +229,10 @@ fn test_sleep_stage_all_five_types() {
 
     for stage_type in stage_types {
         let display = stage_type.to_string();
-        assert!(!display.is_empty(), "Display should produce non-empty string for {stage_type:?}");
+        assert!(
+            !display.is_empty(),
+            "Display should produce non-empty string for {stage_type:?}"
+        );
     }
 }
 
@@ -245,9 +247,11 @@ fn test_sleep_stage_type_serialization() {
     ];
 
     for (variant, expected_json) in types {
-        let json = serde_json::to_string(&variant)
-            .expect("SleepStageType should serialize");
-        assert_eq!(json, expected_json, "Serialization mismatch for {variant:?}");
+        let json = serde_json::to_string(&variant).expect("SleepStageType should serialize");
+        assert_eq!(
+            json, expected_json,
+            "Serialization mismatch for {variant:?}"
+        );
     }
 }
 
@@ -262,9 +266,12 @@ fn test_sleep_stage_type_deserialization() {
     ];
 
     for (json_str, expected) in cases {
-        let deserialized: SleepStageType = serde_json::from_str(json_str)
-            .expect("SleepStageType should deserialize");
-        assert_eq!(deserialized, expected, "Deserialization mismatch for {json_str}");
+        let deserialized: SleepStageType =
+            serde_json::from_str(json_str).expect("SleepStageType should deserialize");
+        assert_eq!(
+            deserialized, expected,
+            "Deserialization mismatch for {json_str}"
+        );
     }
 }
 
@@ -433,15 +440,17 @@ fn test_sleep_score_none() {
 #[test]
 fn test_json_serialization_roundtrip_full_session() {
     let session = full_sleep_session();
-    let json = serde_json::to_string(&session)
-        .expect("full session should serialize to JSON");
-    let roundtripped: StoredSleepSession = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to StoredSleepSession");
+    let json = serde_json::to_string(&session).expect("full session should serialize to JSON");
+    let roundtripped: StoredSleepSession =
+        serde_json::from_str(&json).expect("JSON should deserialize back to StoredSleepSession");
 
     assert_eq!(roundtripped.id, session.id);
     assert_eq!(roundtripped.user_id, session.user_id);
     assert_eq!(roundtripped.is_nap, session.is_nap);
-    assert_eq!(roundtripped.total_sleep_seconds, session.total_sleep_seconds);
+    assert_eq!(
+        roundtripped.total_sleep_seconds,
+        session.total_sleep_seconds
+    );
     assert_eq!(roundtripped.sleep_score, session.sleep_score);
     assert_eq!(roundtripped.stages.len(), session.stages.len());
     assert_eq!(roundtripped.stages[0].stage_type, SleepStageType::Light);
@@ -497,10 +506,9 @@ fn test_large_stages_array_full_night() {
     assert_eq!(session.stages.len(), 24);
 
     // Verify roundtrip with large stages array
-    let json = serde_json::to_string(&session)
-        .expect("session with 24 stages should serialize");
-    let roundtripped: StoredSleepSession = serde_json::from_str(&json)
-        .expect("large stages array should deserialize");
+    let json = serde_json::to_string(&session).expect("session with 24 stages should serialize");
+    let roundtripped: StoredSleepSession =
+        serde_json::from_str(&json).expect("large stages array should deserialize");
     assert_eq!(roundtripped.stages.len(), 24);
 }
 
@@ -524,14 +532,12 @@ fn test_sleep_details_construction() {
         total_sleep_seconds: Some(27000),
         sleep_efficiency: Some(93.75),
         sleep_score: Some(85),
-        stages: vec![
-            SleepStage {
-                stage_type: SleepStageType::Light,
-                start,
-                end: start + Duration::minutes(30),
-                duration_seconds: 1800,
-            },
-        ],
+        stages: vec![SleepStage {
+            stage_type: SleepStageType::Light,
+            start,
+            end: start + Duration::minutes(30),
+            duration_seconds: 1800,
+        }],
     };
 
     assert_eq!(details.event.category, EventCategory::Sleep);

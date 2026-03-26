@@ -36,7 +36,10 @@ fn test_stored_recovery_metrics_all_fields() {
     assert_eq!(metrics.id, "rec-full");
     assert_eq!(metrics.user_id, "user-001");
     assert_eq!(metrics.data_source_id, "ds-garmin");
-    assert_eq!(metrics.date, NaiveDate::from_ymd_opt(2026, 3, 24).expect("valid date"));
+    assert_eq!(
+        metrics.date,
+        NaiveDate::from_ymd_opt(2026, 3, 24).expect("valid date")
+    );
     assert_eq!(metrics.recovery_score, Some(78));
     assert_eq!(metrics.readiness_score, Some(82));
     assert_eq!(metrics.hrv_ms, Some(45.0));
@@ -156,10 +159,9 @@ fn test_skin_temp_deviation_positive() {
 #[test]
 fn test_json_serialization_roundtrip() {
     let metrics = full_recovery_metrics();
-    let json = serde_json::to_string(&metrics)
-        .expect("recovery metrics should serialize to JSON");
-    let roundtripped: StoredRecoveryMetrics = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to StoredRecoveryMetrics");
+    let json = serde_json::to_string(&metrics).expect("recovery metrics should serialize to JSON");
+    let roundtripped: StoredRecoveryMetrics =
+        serde_json::from_str(&json).expect("JSON should deserialize back to StoredRecoveryMetrics");
 
     assert_eq!(roundtripped.id, metrics.id);
     assert_eq!(roundtripped.user_id, metrics.user_id);
@@ -169,16 +171,27 @@ fn test_json_serialization_roundtrip() {
     assert_eq!(roundtripped.hrv_ms, metrics.hrv_ms);
     assert_eq!(roundtripped.resting_heart_rate, metrics.resting_heart_rate);
     assert_eq!(roundtripped.stress_score, metrics.stress_score);
-    assert_eq!(roundtripped.skin_temp_deviation, metrics.skin_temp_deviation);
+    assert_eq!(
+        roundtripped.skin_temp_deviation,
+        metrics.skin_temp_deviation
+    );
 }
 
 #[test]
 fn test_json_optional_fields_present_when_populated() {
     let metrics = full_recovery_metrics();
-    let json = serde_json::to_string(&metrics)
-        .expect("recovery metrics should serialize");
+    let json = serde_json::to_string(&metrics).expect("recovery metrics should serialize");
 
-    assert!(json.contains("\"recovery_score\""), "populated recovery_score should appear in JSON");
-    assert!(json.contains("\"hrv_ms\""), "populated hrv_ms should appear in JSON");
-    assert!(json.contains("\"skin_temp_deviation\""), "populated skin_temp_deviation should appear in JSON");
+    assert!(
+        json.contains("\"recovery_score\""),
+        "populated recovery_score should appear in JSON"
+    );
+    assert!(
+        json.contains("\"hrv_ms\""),
+        "populated hrv_ms should appear in JSON"
+    );
+    assert!(
+        json.contains("\"skin_temp_deviation\""),
+        "populated skin_temp_deviation should appear in JSON"
+    );
 }

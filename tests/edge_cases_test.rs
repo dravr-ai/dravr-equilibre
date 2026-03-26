@@ -63,10 +63,9 @@ fn test_unicode_device_model() {
     assert!(ds.original_source_name.is_some());
 
     // Roundtrip through JSON preserves Unicode
-    let json = serde_json::to_string(&ds)
-        .expect("Unicode data source should serialize");
-    let roundtripped: DataSource = serde_json::from_str(&json)
-        .expect("Unicode JSON should deserialize");
+    let json = serde_json::to_string(&ds).expect("Unicode data source should serialize");
+    let roundtripped: DataSource =
+        serde_json::from_str(&json).expect("Unicode JSON should deserialize");
     assert_eq!(roundtripped.device_model, ds.device_model);
     assert_eq!(roundtripped.original_source_name, ds.original_source_name);
 }

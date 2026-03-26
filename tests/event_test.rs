@@ -284,13 +284,11 @@ fn test_workout_watts_and_elevation() {
     };
 
     assert!(
-        workout.average_watts.expect("avg watts set")
-            <= workout.max_watts.expect("max watts set"),
+        workout.average_watts.expect("avg watts set") <= workout.max_watts.expect("max watts set"),
         "average watts should not exceed max watts"
     );
     assert!(
-        workout.elev_low.expect("elev low set")
-            <= workout.elev_high.expect("elev high set"),
+        workout.elev_low.expect("elev low set") <= workout.elev_high.expect("elev high set"),
         "lowest elevation should not exceed highest elevation"
     );
 }
@@ -327,16 +325,18 @@ fn test_workout_details_json_roundtrip() {
         elev_low: Some(230.0),
     };
 
-    let json = serde_json::to_string(&workout)
-        .expect("WorkoutDetails should serialize to JSON");
-    let roundtripped: WorkoutDetails = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to WorkoutDetails");
+    let json = serde_json::to_string(&workout).expect("WorkoutDetails should serialize to JSON");
+    let roundtripped: WorkoutDetails =
+        serde_json::from_str(&json).expect("JSON should deserialize back to WorkoutDetails");
 
     assert_eq!(roundtripped.event.id, workout.event.id);
     assert_eq!(roundtripped.event.category, EventCategory::Workout);
     assert_eq!(roundtripped.heart_rate_avg, workout.heart_rate_avg);
     assert_eq!(roundtripped.distance, workout.distance);
-    assert_eq!(roundtripped.total_elevation_gain, workout.total_elevation_gain);
+    assert_eq!(
+        roundtripped.total_elevation_gain,
+        workout.total_elevation_gain
+    );
 }
 
 #[test]

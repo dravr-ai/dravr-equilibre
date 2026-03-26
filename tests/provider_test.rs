@@ -89,10 +89,9 @@ fn test_credentials_serialization_roundtrip() {
         scopes: vec!["read".to_owned(), "write".to_owned()],
     };
 
-    let json = serde_json::to_string(&creds)
-        .expect("Credentials should serialize to JSON");
-    let roundtripped: Credentials = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to Credentials");
+    let json = serde_json::to_string(&creds).expect("Credentials should serialize to JSON");
+    let roundtripped: Credentials =
+        serde_json::from_str(&json).expect("JSON should deserialize back to Credentials");
 
     assert_eq!(roundtripped.access_token, creds.access_token);
     assert_eq!(roundtripped.refresh_token, creds.refresh_token);
@@ -157,16 +156,12 @@ fn test_continuous_metric_batch_serialization_roundtrip() {
     let now = Utc::now();
     let batch = ContinuousMetricBatch {
         series_type_id: 42,
-        points: vec![
-            (now, 98.6),
-            (now + Duration::seconds(30), 98.7),
-        ],
+        points: vec![(now, 98.6), (now + Duration::seconds(30), 98.7)],
     };
 
-    let json = serde_json::to_string(&batch)
-        .expect("ContinuousMetricBatch should serialize");
-    let roundtripped: ContinuousMetricBatch = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to ContinuousMetricBatch");
+    let json = serde_json::to_string(&batch).expect("ContinuousMetricBatch should serialize");
+    let roundtripped: ContinuousMetricBatch =
+        serde_json::from_str(&json).expect("JSON should deserialize back to ContinuousMetricBatch");
 
     assert_eq!(roundtripped.series_type_id, batch.series_type_id);
     assert_eq!(roundtripped.points.len(), batch.points.len());

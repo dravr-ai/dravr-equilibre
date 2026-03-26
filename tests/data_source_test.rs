@@ -108,8 +108,7 @@ fn test_device_type_serialization_all_variants() {
     ];
 
     for (variant, expected) in cases {
-        let json = serde_json::to_string(&variant)
-            .expect("DeviceType should serialize");
+        let json = serde_json::to_string(&variant).expect("DeviceType should serialize");
         assert_eq!(json, expected, "Serialization mismatch for {variant:?}");
     }
 }
@@ -126,9 +125,12 @@ fn test_device_type_deserialization_all_variants() {
     ];
 
     for (json_str, expected) in cases {
-        let deserialized: DeviceType = serde_json::from_str(json_str)
-            .expect("DeviceType should deserialize");
-        assert_eq!(deserialized, expected, "Deserialization mismatch for {json_str}");
+        let deserialized: DeviceType =
+            serde_json::from_str(json_str).expect("DeviceType should deserialize");
+        assert_eq!(
+            deserialized, expected,
+            "Deserialization mismatch for {json_str}"
+        );
     }
 }
 
@@ -162,10 +164,9 @@ fn test_data_source_with_each_device_type() {
 #[test]
 fn test_data_source_json_roundtrip() {
     let ds = full_data_source("ds-rt", "garmin", DeviceType::Watch);
-    let json = serde_json::to_string(&ds)
-        .expect("DataSource should serialize to JSON");
-    let roundtripped: DataSource = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to DataSource");
+    let json = serde_json::to_string(&ds).expect("DataSource should serialize to JSON");
+    let roundtripped: DataSource =
+        serde_json::from_str(&json).expect("JSON should deserialize back to DataSource");
 
     assert_eq!(roundtripped.id, ds.id);
     assert_eq!(roundtripped.user_id, ds.user_id);

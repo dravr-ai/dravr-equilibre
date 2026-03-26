@@ -113,8 +113,7 @@ fn test_blood_pressure_separate_fields() {
     assert_eq!(metrics.diastolic_bp, Some(80));
     // Systolic should be higher than diastolic in normal readings
     assert!(
-        metrics.systolic_bp.expect("systolic set")
-            > metrics.diastolic_bp.expect("diastolic set")
+        metrics.systolic_bp.expect("systolic set") > metrics.diastolic_bp.expect("diastolic set")
     );
 }
 
@@ -144,10 +143,9 @@ fn test_muscle_mass_and_bone_mass() {
 #[test]
 fn test_json_serialization_roundtrip() {
     let metrics = full_health_metrics();
-    let json = serde_json::to_string(&metrics)
-        .expect("health metrics should serialize to JSON");
-    let roundtripped: StoredHealthMetrics = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to StoredHealthMetrics");
+    let json = serde_json::to_string(&metrics).expect("health metrics should serialize to JSON");
+    let roundtripped: StoredHealthMetrics =
+        serde_json::from_str(&json).expect("JSON should deserialize back to StoredHealthMetrics");
 
     assert_eq!(roundtripped.id, metrics.id);
     assert_eq!(roundtripped.user_id, metrics.user_id);
@@ -183,10 +181,10 @@ fn test_json_none_fields_serialization() {
         recorded_at: Utc::now(),
     };
 
-    let json = serde_json::to_string(&metrics)
-        .expect("health metrics with None fields should serialize");
-    let roundtripped: StoredHealthMetrics = serde_json::from_str(&json)
-        .expect("JSON with null fields should deserialize");
+    let json =
+        serde_json::to_string(&metrics).expect("health metrics with None fields should serialize");
+    let roundtripped: StoredHealthMetrics =
+        serde_json::from_str(&json).expect("JSON with null fields should deserialize");
 
     // The only weight-related field populated
     assert_eq!(roundtripped.weight_kg, Some(70.0));

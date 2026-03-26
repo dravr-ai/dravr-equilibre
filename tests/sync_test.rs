@@ -53,10 +53,9 @@ fn test_sync_status_serialization_roundtrip_all_states() {
     ];
 
     for status in statuses {
-        let json = serde_json::to_string(&status)
-            .expect("SyncStatus should serialize");
-        let roundtripped: SyncStatus = serde_json::from_str(&json)
-            .expect("SyncStatus should deserialize");
+        let json = serde_json::to_string(&status).expect("SyncStatus should serialize");
+        let roundtripped: SyncStatus =
+            serde_json::from_str(&json).expect("SyncStatus should deserialize");
         assert_eq!(roundtripped, status, "Roundtrip failed for {status:?}");
     }
 }
@@ -171,10 +170,9 @@ fn test_sync_result_serialization_roundtrip() {
         completed_at: Some(started + Duration::seconds(15)),
     };
 
-    let json = serde_json::to_string(&result)
-        .expect("SyncResult should serialize to JSON");
-    let roundtripped: SyncResult = serde_json::from_str(&json)
-        .expect("JSON should deserialize back to SyncResult");
+    let json = serde_json::to_string(&result).expect("SyncResult should serialize to JSON");
+    let roundtripped: SyncResult =
+        serde_json::from_str(&json).expect("JSON should deserialize back to SyncResult");
 
     assert_eq!(roundtripped.status, result.status);
     assert_eq!(roundtripped.provider, result.provider);
@@ -201,12 +199,11 @@ fn test_sync_result_error_message_none_in_json() {
         completed_at: None,
     };
 
-    let json = serde_json::to_string(&result)
-        .expect("SyncResult should serialize");
+    let json = serde_json::to_string(&result).expect("SyncResult should serialize");
 
     // error_message is still present as null (no skip_serializing_if on this struct)
     // Verify the roundtrip preserves None
-    let roundtripped: SyncResult = serde_json::from_str(&json)
-        .expect("SyncResult should deserialize");
+    let roundtripped: SyncResult =
+        serde_json::from_str(&json).expect("SyncResult should deserialize");
     assert!(roundtripped.error_message.is_none());
 }
