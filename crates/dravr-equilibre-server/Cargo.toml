@@ -27,7 +27,7 @@ path = "src/main.rs"
 [dependencies]
 dravr-equilibre = { path = "../..", version = "0.2.0" }
 dravr-equilibre-mcp = { path = "../dravr-equilibre-mcp", version = "0.2.0" }
-dravr-tronc = "0.1.0"
+dravr-tronc = { version = "0.2", features = ["notifications"] }
 axum = "0.8"
 clap = { version = "4", features = ["derive"] }
 serde_json = "1"
