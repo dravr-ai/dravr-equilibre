@@ -6,7 +6,7 @@
 
 [package]
 name = "dravr-equilibre-server"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "Apache-2.0"
 description = "Unified REST API + MCP server for dravr-equilibre health domain models"
@@ -25,8 +25,8 @@ name = "dravr-equilibre-server"
 path = "src/main.rs"
 
 [dependencies]
-dravr-equilibre = { path = "../..", version = "0.2.0" }
-dravr-equilibre-mcp = { path = "../dravr-equilibre-mcp", version = "0.2.0" }
+dravr-equilibre = { path = "../..", version = "0.2.1" }
+dravr-equilibre-mcp = { path = "../dravr-equilibre-mcp", version = "0.2.1" }
 dravr-tronc = { version = "0.2", features = ["notifications"] }
 axum = "0.8"
 clap = { version = "4", features = ["derive"] }

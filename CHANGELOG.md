@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.1] — 2026-03-26
+
+### Fixed
+
+- fix: scope release version bump to [package] section to protect external deps
+
+### Other
+
+- deps: bump dravr-tronc to 0.2 with error notification support
+- style: fix formatting in test files
+
+
+
 ## [0.2.0] — 2026-03-25
 
 

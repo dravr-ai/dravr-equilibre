@@ -6,7 +6,7 @@
 
 [package]
 name = "dravr-equilibre-mcp"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "Apache-2.0"
 description = "MCP server for dravr-equilibre health domain models — expose health intelligence via Model Context Protocol"
@@ -25,7 +25,7 @@ name = "dravr-equilibre-mcp"
 path = "src/main.rs"
 
 [dependencies]
-dravr-equilibre = { path = "../..", version = "0.2.0" }
+dravr-equilibre = { path = "../..", version = "0.2.1" }
 dravr-tronc = "0.2"
 clap = { version = "4", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
