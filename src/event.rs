@@ -10,6 +10,8 @@
 //! (workouts, sleep sessions, etc.). Specific event types extend this
 //! base with domain-specific fields.
 
+use std::fmt::{self, Display};
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
@@ -22,8 +24,8 @@ pub enum EventCategory {
     Sleep,
 }
 
-impl std::fmt::Display for EventCategory {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl Display for EventCategory {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::Workout => write!(f, "Workout"),
             Self::Sleep => write!(f, "Sleep"),

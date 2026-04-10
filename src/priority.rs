@@ -16,6 +16,8 @@
 //! **Provider priority** (lower = higher priority):
 //! apple (1) > garmin (2) > polar (3) > suunto (4) > whoop (5) > oura (6) > fitbit (7) > coros (8)
 
+use std::cmp::Ordering;
+
 use crate::data_source::{DataSource, DeviceType};
 
 /// Priority ranking for device types.
@@ -74,9 +76,9 @@ pub fn resolve_duplicate<'a>(a: &'a DataSource, b: &'a DataSource) -> &'a DataSo
     let device_b = DevicePriority::priority(&b.device_type);
 
     match device_a.cmp(&device_b) {
-        std::cmp::Ordering::Less => a,
-        std::cmp::Ordering::Greater => b,
-        std::cmp::Ordering::Equal => {
+        Ordering::Less => a,
+        Ordering::Greater => b,
+        Ordering::Equal => {
             let provider_a = ProviderPriority::priority(&a.provider);
             let provider_b = ProviderPriority::priority(&b.provider);
             if provider_a <= provider_b {

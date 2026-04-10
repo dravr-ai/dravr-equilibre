@@ -10,6 +10,8 @@
 //! with JSONB-serializable stages. [`SleepDetails`] extends
 //! [`EventRecord`](crate::event::EventRecord) for polymorphic event handling.
 
+use std::fmt::{self, Display};
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
@@ -30,8 +32,8 @@ pub enum SleepStageType {
     Unknown,
 }
 
-impl std::fmt::Display for SleepStageType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl Display for SleepStageType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::Awake => write!(f, "Awake"),
             Self::Light => write!(f, "Light"),

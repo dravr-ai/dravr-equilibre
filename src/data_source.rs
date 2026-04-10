@@ -10,6 +10,8 @@
 //! The [`DeviceType`] enum classifies the hardware form factor for deduplication
 //! priority ordering.
 
+use std::fmt::{self, Display};
+
 use serde::{Deserialize, Serialize};
 
 /// Classification of wearable device form factors.
@@ -32,8 +34,8 @@ pub enum DeviceType {
     Unknown,
 }
 
-impl std::fmt::Display for DeviceType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl Display for DeviceType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::Watch => write!(f, "Watch"),
             Self::Band => write!(f, "Band"),

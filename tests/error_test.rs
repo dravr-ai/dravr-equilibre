@@ -4,6 +4,9 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (c) 2026 dravr.ai
 
+use std::error::Error;
+use std::fmt::Display;
+
 use dravr_equilibre::error::EquilibreError;
 
 #[test]
@@ -85,7 +88,7 @@ fn test_duplicate_data_source_display_contains_source_id() {
 #[test]
 fn test_all_errors_implement_std_error() {
     // Verify that EquilibreError can be used as a trait object of std::error::Error
-    fn assert_is_std_error<E: std::error::Error>(_e: &E) {}
+    fn assert_is_std_error<E: Error>(_e: &E) {}
 
     let errors: Vec<EquilibreError> = vec![
         EquilibreError::missing_field("test"),
@@ -103,7 +106,7 @@ fn test_all_errors_implement_std_error() {
 
 #[test]
 fn test_all_errors_implement_display() {
-    fn assert_has_display<D: std::fmt::Display>(d: &D) -> String {
+    fn assert_has_display<D: Display>(d: &D) -> String {
         d.to_string()
     }
 

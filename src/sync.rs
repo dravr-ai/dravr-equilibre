@@ -9,6 +9,8 @@
 //! [`SyncStatus`] represents the state of a sync operation, while
 //! [`SyncResult`] captures the outcome including counts and errors.
 
+use std::fmt::{self, Display};
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
@@ -27,8 +29,8 @@ pub enum SyncStatus {
     Cancelled,
 }
 
-impl std::fmt::Display for SyncStatus {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+impl Display for SyncStatus {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             Self::Pending => write!(f, "Pending"),
             Self::InProgress => write!(f, "InProgress"),
