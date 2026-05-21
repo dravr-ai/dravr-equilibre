@@ -206,6 +206,7 @@ jobs:
         with:
           name: dravr-equilibre-${{ matrix.target }}
           path: dravr-equilibre-v*.*
+          retention-days: 7
 
   docker:
     name: Docker Image
