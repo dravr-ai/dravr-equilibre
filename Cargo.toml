@@ -12,6 +12,9 @@ name = "dravr-equilibre"
 version = "0.2.3"
 edition = "2021"
 license = "Apache-2.0"
+# Private crate — never publish to public crates.io (matches the rest of the
+# dravr fleet). The missing guard here leaked 0.2.0/0.2.1 publicly.
+publish = false
 description = "Health and wellness domain models — composition-based provider traits, device tracking, and data source management"
 repository = "https://github.com/dravr-ai/dravr-equilibre"
 homepage = "https://github.com/dravr-ai/dravr-equilibre"
