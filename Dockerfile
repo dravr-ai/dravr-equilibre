@@ -1,7 +1,7 @@
 # ABOUTME: Multi-stage Docker build for dravr-equilibre-server and dravr-equilibre-mcp binaries
 # ABOUTME: Minimal runtime image for health domain model server
 
-FROM rust:1-bookworm AS builder
+FROM rust:1.96-bookworm AS builder
 WORKDIR /build
 COPY . .
 RUN cargo build --release -p dravr-equilibre-server -p dravr-equilibre-mcp
