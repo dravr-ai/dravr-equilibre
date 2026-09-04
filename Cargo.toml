@@ -9,7 +9,7 @@ members = [".", "crates/dravr-equilibre-mcp", "crates/dravr-equilibre-server"]
 
 [package]
 name = "dravr-equilibre"
-version = "0.2.4"
+version = "0.2.5"
 edition = "2021"
 license = "Apache-2.0"
 # Private crate — never publish to public crates.io (matches the rest of the

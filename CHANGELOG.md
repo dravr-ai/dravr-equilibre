@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.5] — 2026-09-04
+
+### Fixed
+
+- fix(deps): bump quinn-proto past the memory-exhaustion advisory
+- fix: repair the SessionStart bootstrap guard for an empty .build
+
+### Other
+
+- Delete the three provider handler traits with no implementors
+- chore(deps): bump dravr-tronc 0.5.3 -> 0.6.2
+- chore(register): ledger + weekly phase review
+- chore(register): point at dravr-carnet, the dravr-family register
+
+
+
 ## [0.2.4] — 2026-06-19
 
 ### Changed
