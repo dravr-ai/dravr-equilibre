@@ -3,13 +3,13 @@
 [![CI](https://github.com/dravr-ai/dravr-equilibre/actions/workflows/ci.yml/badge.svg)](https://github.com/dravr-ai/dravr-equilibre/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-Health and wellness domain models for the Dravr platform. Composition-based provider traits, device tracking, data source management, and event persistence. Pure domain models with zero database or HTTP dependencies in the core crate.
+Health and wellness domain models for the Dravr platform. Provider data models, device tracking, data source management, and event persistence. Pure domain models with zero database or HTTP dependencies in the core crate.
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
 - [Domain Models](#domain-models)
-- [Provider Traits](#provider-traits)
+- [Provider Data](#provider-data)
 - [Deduplication](#deduplication)
 - [REST API Server](#rest-api-server)
 - [MCP Server](#mcp-server)
@@ -75,28 +75,23 @@ cargo run --bin dravr-equilibre-mcp -- --transport http --port 3200
 | `StoredHealthMetrics` | Body composition and vitals (weight, BP, glucose) |
 | `SyncStatus` / `SyncResult` | Sync lifecycle tracking |
 
-## Provider Traits
+## Provider Data
 
-Composition-based provider traits allow each provider to implement only what it supports:
+Continuous monitoring streams arrive as one `ContinuousMetricBatch` per metric series:
 
 ```rust
-use dravr_equilibre::provider::ProviderStrategy;
+use chrono::Utc;
+use dravr_equilibre::provider::ContinuousMetricBatch;
 
-// Strava: OAuth + Workouts (no continuous data)
-let strava = ProviderStrategy::new("strava");
-
-// Garmin: OAuth + Workouts + Continuous Data
-let garmin = ProviderStrategy::new("garmin");
-
-// Oura: OAuth + Continuous Data (no workouts)
-let oura = ProviderStrategy::new("oura");
+let heart_rate = ContinuousMetricBatch {
+    series_type_id: 1,
+    points: vec![(Utc::now(), 72.0)],
+};
 ```
 
-| Trait | Purpose |
-|-------|---------|
-| `OAuthHandler` | Token lifecycle (authorize, refresh, revoke) |
-| `WorkoutHandler` | Activity/workout sync |
-| `ContinuousDataHandler` | 24/7 monitoring (sleep, recovery, HR, steps) |
+| Model | Description |
+|-------|-------------|
+| `ContinuousMetricBatch` | Time series for one metric type (HR, steps, respiratory rate) |
 
 ## Deduplication
 
@@ -117,7 +112,7 @@ dravr-equilibre/              # Core library (domain models + traits)
     error.rs                  # EquilibreError
     data_source.rs            # DataSource, DeviceType
     priority.rs               # DevicePriority, ProviderPriority
-    provider.rs               # OAuthHandler, WorkoutHandler, ContinuousDataHandler
+    provider.rs               # ContinuousMetricBatch
     event.rs                  # EventRecord, EventCategory
     workout.rs                # WorkoutDetails
     sleep.rs                  # StoredSleepSession, SleepDetails, SleepStage

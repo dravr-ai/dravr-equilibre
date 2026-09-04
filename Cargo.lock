@@ -292,7 +292,6 @@ dependencies = [
 name = "dravr-equilibre"
 version = "0.2.4"
 dependencies = [
- "async-trait",
  "chrono",
  "serde",
  "serde_json",

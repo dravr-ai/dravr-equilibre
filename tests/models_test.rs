@@ -373,34 +373,6 @@ fn test_error_display_messages() {
 }
 
 #[test]
-fn test_provider_strategy_builder() {
-    use dravr_equilibre::provider::ProviderStrategy;
-
-    let strategy = ProviderStrategy::new("strava");
-    assert_eq!(strategy.name, "strava");
-    assert!(!strategy.supports_oauth());
-    assert!(!strategy.supports_workouts());
-    assert!(!strategy.supports_continuous_data());
-}
-
-#[test]
-fn test_credentials_serialization() {
-    use dravr_equilibre::provider::Credentials;
-
-    let creds = Credentials {
-        access_token: "tok_abc123".to_owned(),
-        refresh_token: Some("ref_xyz789".to_owned()),
-        expires_at: Some(Utc::now()),
-        scopes: vec!["read".to_owned(), "activity:read".to_owned()],
-    };
-
-    let json = serde_json::to_string(&creds).unwrap();
-    let deserialized: Credentials = serde_json::from_str(&json).unwrap();
-    assert_eq!(deserialized.access_token, "tok_abc123");
-    assert_eq!(deserialized.scopes.len(), 2);
-}
-
-#[test]
 fn test_continuous_metric_batch_serialization() {
     use dravr_equilibre::provider::ContinuousMetricBatch;
 

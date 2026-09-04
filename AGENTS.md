@@ -60,16 +60,16 @@ The backend is a Cargo workspace with 3 crates:
 
 | Crate | Description |
 |-------|-------------|
-| `dravr-equilibre` | Core library with health domain models, provider traits, and deduplication |
+| `dravr-equilibre` | Core library with health domain models, provider data models, and deduplication |
 | `dravr-equilibre-mcp` | MCP server exposing health models via Model Context Protocol |
 | `dravr-equilibre-server` | Unified REST API + MCP server + CLI binary |
 
 ## Project Overview
 
-**dravr-equilibre** provides health and wellness domain models with composition-based provider traits for the Dravr platform.
+**dravr-equilibre** provides health and wellness domain models with provider data models for the Dravr platform.
 
 ### Key Concepts
-- **Composition-based provider traits** — `OAuthHandler`, `WorkoutHandler`, `ContinuousDataHandler`
+- **ContinuousMetricBatch** — provider-sourced monitoring time series, one batch per metric series type
 - **DataSource** — device/provider tracking with model, type, software version
 - **DeviceType** enum — Watch, Band, Phone, Ring, Scale, Unknown
 - **DevicePriority / ProviderPriority** — priority systems for deduplication
@@ -81,8 +81,7 @@ The backend is a Cargo workspace with 3 crates:
 - **SyncStatus / SyncResult** — sync lifecycle tracking
 
 ### Design Decisions
-- Providers compose only what they support (Strava gets WorkoutHandler only, Garmin gets all three, etc.)
-- `ProviderStrategy` holds optional boxed trait objects for each handler
+- Pure domain models: no database or HTTP dependencies in the core crate
 - Device priority: Watch > Band > Ring > Phone > Scale > Unknown
 - Provider priority: apple > garmin > polar > suunto > whoop > oura > fitbit > coros
 

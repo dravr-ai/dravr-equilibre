@@ -1,5 +1,5 @@
 // ABOUTME: Health and wellness domain models for the Dravr platform
-// ABOUTME: Composition-based provider traits, device tracking, and data source management
+// ABOUTME: Provider data models, device tracking, and data source management
 //
 // SPDX-License-Identifier: Apache-2.0
 // Copyright (c) 2026 dravr.ai
@@ -8,12 +8,12 @@
 
 //! # dravr-equilibre
 //!
-//! Health and wellness domain models providing composition-based provider traits,
+//! Health and wellness domain models providing provider data models,
 //! device tracking, data source management, and event persistence for the Dravr platform.
 //!
 //! ## Features
 //!
-//! - **Provider traits** — `OAuthHandler`, `WorkoutHandler`, `ContinuousDataHandler`
+//! - **Provider data** — `ContinuousMetricBatch` monitoring time series
 //! - **Data sources** — device/provider tracking with type classification
 //! - **Deduplication** — device and provider priority for resolving duplicates
 //! - **Events** — polymorphic event model (workout, sleep)
@@ -49,7 +49,7 @@ pub mod event;
 pub mod health;
 /// Deduplication priority system
 pub mod priority;
-/// Composition-based provider traits
+/// Provider-sourced data models
 pub mod provider;
 /// Recovery and readiness metrics
 pub mod recovery;
@@ -69,10 +69,7 @@ pub use error::{EquilibreError, EquilibreResult};
 pub use event::{EventCategory, EventRecord};
 pub use health::StoredHealthMetrics;
 pub use priority::{resolve_duplicate, DevicePriority, ProviderPriority};
-pub use provider::{
-    ContinuousDataHandler, ContinuousMetricBatch, Credentials, OAuthHandler, ProviderStrategy,
-    WorkoutHandler,
-};
+pub use provider::ContinuousMetricBatch;
 pub use recovery::StoredRecoveryMetrics;
 pub use sleep::{SleepDetails, SleepStage, SleepStageType, StoredSleepSession};
 pub use sync::{SyncResult, SyncStatus};
