@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// Used by [`DevicePriority`](crate::priority::DevicePriority) to determine
 /// which data source takes precedence during deduplication.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, schemars::JsonSchema)]
 pub enum DeviceType {
     /// Smartwatch (e.g., Apple Watch, Garmin Forerunner)
     Watch,
@@ -51,7 +51,7 @@ impl Display for DeviceType {
 ///
 /// Tracks the provider, device hardware, software version, and original source
 /// metadata for data lineage and deduplication.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
 pub struct DataSource {
     /// Unique identifier for this data source.
     pub id: String,

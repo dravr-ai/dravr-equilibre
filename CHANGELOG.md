@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.7] — 2026-09-05
+
+### Added
+
+- feat(schema): DataSource and DeviceType derive JsonSchema, completing what
+  v0.2.6 started. The platform's `list_data_sources` tool serializes
+  DataSource directly, and v0.2.6 missed it because pierre_core re-exports it
+  and so it reads as a platform-owned type at the call site rather than one
+  of ours.
+
+  Checked the rest rather than guessing again: DataSource is the only other
+  equilibre type reachable from an MCP tool payload. EventRecord, SyncResult,
+  SyncStatus and StoredWorkoutDetails are re-exported but never serialized by
+  a tool, so they stay underived — a derive on a type nobody schemas is
+  surface without a consumer.
+
 ## [0.2.6] — 2026-09-05
 
 ### Added
