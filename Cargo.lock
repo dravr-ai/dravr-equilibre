@@ -290,7 +290,7 @@ dependencies = [
 
 [[package]]
 name = "dravr-equilibre"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "chrono",
  "schemars",
@@ -303,7 +303,7 @@ dependencies = [
 
 [[package]]
 name = "dravr-equilibre-mcp"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "clap",
  "dravr-equilibre",
@@ -314,7 +314,7 @@ dependencies = [
 
 [[package]]
 name = "dravr-equilibre-server"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "axum",
  "clap",

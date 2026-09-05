@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.2.6] — 2026-09-05
+
+### Added
+
+- feat(schema): the stored health types derive JsonSchema, so the platform's
+  stored-data MCP tools can declare an outputSchema derived from the type
+  rather than hand-written. Covers StoredSleepSession, StoredRecoveryMetrics,
+  StoredHealthMetrics, and the SleepStage/SleepStageType they nest.
+  schemars carries chrono support as an optional dependency rather than a
+  listed feature, so it arrives as `features = ["chrono04"]` — without it
+  DateTime<Utc> has no JsonSchema impl and none of these derive.
+
+  Additive: a derive adds no field and changes no wire shape. SleepDetails
+  deliberately does not derive — nothing serializes it, and doing so would
+  pull EventRecord in behind it.
+
 ## [0.2.5] — 2026-09-04
 
 ### Fixed
