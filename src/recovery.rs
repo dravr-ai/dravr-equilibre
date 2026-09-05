@@ -17,7 +17,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// Designed for database persistence with denormalized metrics
 /// for fast dashboard queries.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
 pub struct StoredRecoveryMetrics {
     /// Unique identifier.
     pub id: String,

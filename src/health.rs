@@ -17,7 +17,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// Designed for database persistence with denormalized metrics
 /// for trend analysis and health dashboard queries.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
 pub struct StoredHealthMetrics {
     /// Unique identifier.
     pub id: String,

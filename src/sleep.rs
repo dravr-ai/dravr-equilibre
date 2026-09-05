@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 use crate::event::EventRecord;
 
 /// Classification of a sleep stage.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, schemars::JsonSchema)]
 pub enum SleepStageType {
     /// Awake period during sleep.
     Awake,
@@ -47,7 +47,7 @@ impl Display for SleepStageType {
 /// A single sleep stage within a session.
 ///
 /// Records the type and duration of a contiguous sleep stage.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
 pub struct SleepStage {
     /// Classification of this stage.
     pub stage_type: SleepStageType,
@@ -63,7 +63,7 @@ pub struct SleepStage {
 ///
 /// Designed for persistence with JSONB-serializable stages and
 /// nap detection. Includes summary metrics and optional HRV data.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize, schemars::JsonSchema)]
 pub struct StoredSleepSession {
     /// Unique identifier.
     pub id: String,
